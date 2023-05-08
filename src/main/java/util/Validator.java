@@ -17,7 +17,7 @@ public class Validator {
     }
 
     public boolean checkAirport(String[] airportString, String prefixAirportName){
-        if(checkName(airportString[3],prefixAirportName)) {
+        if(checkName(airportString[2],prefixAirportName)) {
             return checkFilters(airportString);
         }
         return false;

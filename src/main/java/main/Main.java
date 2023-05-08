@@ -43,7 +43,7 @@ public class Main {
                     airportString = csvString.split(",");
                     if(validator.checkAirport(airportString, prefixAirportName)){
                         countLines++;
-                        foundAirports.add(String.format("%s%s",airportString[3],Arrays.toString(airportString)));
+                        foundAirports.add(String.format("%s%s",airportString[2],Arrays.toString(airportString)));
                     }
                 }
 
