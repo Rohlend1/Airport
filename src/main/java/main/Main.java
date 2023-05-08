@@ -4,6 +4,8 @@ import util.FilterParser;
 import util.Validator;
 
 import java.io.*;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +23,7 @@ public class Main {
         BufferedReader readerFromConsole = new BufferedReader(new InputStreamReader(System.in));
 
         ClassLoader classLoader = Main.class.getClassLoader();
-        InputStream inputStreamCSV = classLoader.getResourceAsStream("airport.csv");
+        String pathToCSV = URLDecoder.decode(Objects.requireNonNull(classLoader.getResource("airport.csv")).getPath(), StandardCharsets.UTF_8);
 
         System.out.println("Enter your filters: ");
         String filters;
@@ -36,7 +38,7 @@ public class Main {
             String[] airportString;
             long startSearch = System.currentTimeMillis();
 
-            try(BufferedReader readerFromCSV = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStreamCSV)))){
+            try(BufferedReader readerFromCSV = new BufferedReader(new FileReader(pathToCSV))){
                 while((csvString = readerFromCSV.readLine())!=null){
                     airportString = csvString.split(",");
                     if(validator.checkAirport(airportString, prefixAirportName)){
