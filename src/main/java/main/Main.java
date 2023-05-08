@@ -14,7 +14,6 @@ public class Main {
     private static final List<String> operators = new ArrayList<>();
     private static final List<String> valuesToCompare = new ArrayList<>();
     private static final List<String> expressions = new ArrayList<>();
-    private static final List<String> foundAirport = new ArrayList<>();
     private static int countLines = 0;
 
     public static void main(String[] args) throws IOException {
@@ -46,8 +45,7 @@ public class Main {
                 }
 
                 long endSearch = System.currentTimeMillis();
-                Collections.sort(foundAirport);
-                foundAirport.forEach(System.out::println);
+
                 System.out.printf("Total number of lines %d, executed for %d ms%n",countLines,(endSearch-startSearch));
                 resetVariables();
             }
@@ -56,7 +54,6 @@ public class Main {
     }
     private static void resetVariables(){
         countLines=0;
-        foundAirport.clear();
         columnNumbers.clear();
         expressions.clear();
         operators.clear();
