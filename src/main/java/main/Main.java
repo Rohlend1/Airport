@@ -14,8 +14,6 @@ public class Main {
     private static final List<Integer> columnNumbers = new ArrayList<>();
     private static final List<String> operators = new ArrayList<>();
     private static final List<String> valuesToCompare = new ArrayList<>();
-    private static final List<String> foundAirports = new ArrayList<>();
-
     private static final List<String> expressions = new ArrayList<>();
     private static int countLines = 0;
 
@@ -49,7 +47,6 @@ public class Main {
 
                 long endSearch = System.currentTimeMillis();
 
-                foundAirports.forEach(System.out::println);
                 System.out.printf("Total number of lines %d, executed for %d ms%n",countLines,(endSearch-startSearch));
                 resetVariables();
             }
@@ -57,7 +54,6 @@ public class Main {
         }
     }
     private static void resetVariables(){
-        foundAirports.clear();
         countLines=0;
         columnNumbers.clear();
         expressions.clear();
