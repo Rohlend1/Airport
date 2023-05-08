@@ -6,10 +6,7 @@ import util.Validator;
 import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Main {
 
@@ -17,6 +14,7 @@ public class Main {
     private static final List<String> operators = new ArrayList<>();
     private static final List<String> valuesToCompare = new ArrayList<>();
     private static final List<String> expressions = new ArrayList<>();
+    private static final List<String> foundAirport = new ArrayList<>();
     private static int countLines = 0;
 
     public static void main(String[] args) throws IOException {
@@ -42,13 +40,14 @@ public class Main {
                 while((csvString = readerFromCSV.readLine())!=null){
                     airportString = csvString.split(",");
                     if(validator.checkAirport(airportString, prefixAirportName)){
-                        System.out.printf("%s%s%n",airportString[2],Arrays.toString(airportString));
+                        foundAirport.add(String.format("%s%s%n",airportString[2],Arrays.toString(airportString)));
                         countLines++;
                     }
                 }
 
                 long endSearch = System.currentTimeMillis();
-
+                Collections.sort(foundAirport);
+                foundAirport.forEach(System.out::println);
                 System.out.printf("Total number of lines %d, executed for %d ms%n",countLines,(endSearch-startSearch));
                 resetVariables();
             }
@@ -57,6 +56,7 @@ public class Main {
     }
     private static void resetVariables(){
         countLines=0;
+        foundAirport.clear();
         columnNumbers.clear();
         expressions.clear();
         operators.clear();
