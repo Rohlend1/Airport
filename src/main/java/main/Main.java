@@ -42,8 +42,8 @@ public class Main {
                 while((csvString = readerFromCSV.readLine())!=null){
                     airportString = csvString.split(",");
                     if(validator.checkAirport(airportString, prefixAirportName)){
+                        System.out.printf("%s%s%n",airportString[2],Arrays.toString(airportString));
                         countLines++;
-                        foundAirports.add(String.format("%s%s",airportString[2],Arrays.toString(airportString)));
                     }
                 }
 
