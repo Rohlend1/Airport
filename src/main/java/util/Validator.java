@@ -26,11 +26,12 @@ public class Validator {
     private void checkFilters(){
         if(operators.size() != columnNumbers.size() || operators.size() != valuesToCompare.size() ||
                 (operators.size() != expressions.size()*2 && expressions.size() != 0 && operators.size() < 2)||
-        (operators.size()==0 && expressions.size() == 0 && columnNumbers.size()==0 && valuesToCompare.size()==0)){
+        (!FilterParser.isFilterStringEmpty() && operators.size()==0 && expressions.size() == 0 && columnNumbers.size()==0 && valuesToCompare.size()==0)){
             throw new IllegalArgumentException("Incorrect filters");
         }
     }
     private boolean validateAirport(String[] airportString) {
+        if(FilterParser.isFilterStringEmpty()) return true;
         if(operators.size()==1) return Executor.evaluateOperation(operators.get(0), airportString[columnNumbers.get(0)],valuesToCompare.get(0));
 
         int counter = 2;

@@ -5,9 +5,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FilterParser {
-
+    private static boolean filterStringIsEmpty = false;
     public static void parseFilters(String filters, List<Integer> columnNumbers, List<String> operators,
                                     List<String> valuesToCompare,List<String> expressions){
+        filterStringIsEmpty = false;
+        if(filters.isEmpty()) {
+            filterStringIsEmpty = true;
+            return;
+        }
         FilterParser.fillColumnNumbers(filters,columnNumbers);
         FilterParser.fillOperatorsAndValuesToCompare(filters,operators,valuesToCompare);
         FilterParser.fillExpressions(filters,expressions);
@@ -18,6 +23,9 @@ public class FilterParser {
         for (int i = 1; i < numbersString.length;i+=2){
             columnNumbers.add(Integer.parseInt(numbersString[i])-1);
         }
+    }
+    public static boolean isFilterStringEmpty(){
+        return filterStringIsEmpty;
     }
     private static void fillOperatorsAndValuesToCompare(String filters,List<String> operators, List<String> valuesToCompare){
         Pattern pattern = Pattern.compile("(=|<>|<|>|<=|>=)([^&\\s]+)");
